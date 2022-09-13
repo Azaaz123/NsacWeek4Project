@@ -27,6 +27,17 @@ public class ElectricVehicle {
 		@Column(nullable=false)
 		private int mileRange;
 
+		
+		
+		public ElectricVehicle(long id, String carMake, String carModel, int releaseYear, int mileRange) {
+			super();
+			this.id = id;
+			this.carMake = carMake;
+			this.carModel = carModel;
+			this.releaseYear = releaseYear;
+			this.mileRange = mileRange;
+		}
+
 		public long getId() {
 			return id;
 		}
