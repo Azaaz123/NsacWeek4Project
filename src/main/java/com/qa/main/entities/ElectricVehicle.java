@@ -29,6 +29,14 @@ public class ElectricVehicle {
 
 		
 		
+		public ElectricVehicle(String carMake, String carModel, int releaseYear, int mileRange) {
+			super();
+			this.carMake = carMake;
+			this.carModel = carModel;
+			this.releaseYear = releaseYear;
+			this.mileRange = mileRange;
+		}
+
 		public ElectricVehicle(long id, String carMake, String carModel, int releaseYear, int mileRange) {
 			super();
 			this.id = id;
