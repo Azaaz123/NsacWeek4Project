@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,13 +20,12 @@ public class ElectricVehicleController {
 	
 	private List<ElectricVehicle> cars = new ArrayList <>();
 	
-	// 
-	// Get Requests (READ)
+	 
+	 //Get Requests (READ)
 		@GetMapping("/getAll")
 		public List<ElectricVehicle> getAll() {
-			return cars;
-			
-			
+			return cars ;
+		}		
 			
 		// Post Requests (CREATE)
 		 @PostMapping("/create")
@@ -35,5 +35,12 @@ public class ElectricVehicleController {
 		return cars.get(cars.size () -1);
 		
 		 }
+		 
+		 @GetMapping("/getById/{id}")
+			public ElectricVehicle getById(@PathVariable int id) {
+				return cars.get(id);
+			} 
+			
+		 
 		 
 }
