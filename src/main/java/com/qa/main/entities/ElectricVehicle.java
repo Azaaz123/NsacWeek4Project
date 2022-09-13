@@ -27,7 +27,7 @@ public class ElectricVehicle {
 		@Column(nullable=false)
 		private int mileRange;
 
-		
+		public ElectricVehicle() {}
 		
 		public ElectricVehicle(String carMake, String carModel, int releaseYear, int mileRange) {
 			super();
