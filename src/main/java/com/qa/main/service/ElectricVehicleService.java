@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.qa.main.entities.ElectricVehicle;
+import com.qa.main.repo.ElectricVehicleRepo;
 
 @Service
 public class ElectricVehicleService {
