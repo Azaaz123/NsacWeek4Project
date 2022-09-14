@@ -4,12 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import com.qa.main.entities.ElectricVehicle;
 
@@ -25,7 +19,7 @@ public class ElectricVehicleService {
 		}		
 			
 
-		public ElectricVehicle create(@RequestBody ElectricVehicle input) {
+		public ElectricVehicle create( ElectricVehicle input) {
 			 cars.add(input);
 			 
 		return cars.get(cars.size () -1);
@@ -33,13 +27,12 @@ public class ElectricVehicleService {
 		 }
 		 
 
-			public ElectricVehicle getById(@PathVariable int id) {
+			public ElectricVehicle getById( int id) {
 				return cars.get(id);
 			} 
 		 
 		
 			 	 
-
 		 public ElectricVehicle update( int id, ElectricVehicle input) {
 			 cars.remove(id);
 			 cars.add(id, input);
@@ -51,6 +44,21 @@ public class ElectricVehicleService {
 		 public ElectricVehicle delete(int id) {
 			return this.cars.remove(id);
 		 }
+		 
+		 public List<ElectricVehicle> getByCarMake(String carMake) {
+			 return repo.findElectricVehicleByCarMake(carMake);	 
+			 }
+		 
+		 public List<ElectricVehicle> getByCarModel(String carModel) {
+			 return repo.findElectricVehicleByCarModel(carModel);	 
+			 }
+		 
+		 public List<ElectricVehicle> getByReleaseYear(int releaseYear) {
+			 return repo.findElectricVehicleByReleaseYear(releaseYear);	 
+			 		 }
+		 public List<ElectricVehicle> getByMileRangeGreaterThan(int mileRange) {
+			 return repo.findElectricVehicleByMileRangeGreaterThan(mileRange);	 
+			 		 }
 		 
 		 
 }
