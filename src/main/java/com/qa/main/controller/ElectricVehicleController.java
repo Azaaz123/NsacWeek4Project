@@ -18,45 +18,38 @@ import com.qa.main.entities.ElectricVehicle;
 @RestController
 public class ElectricVehicleController {
 	
-	/// Temporary storage
-	
-	private List<ElectricVehicle> cars = new ArrayList <>();
-	
+
 	 
 	 //Get Requests (READ)
 		@GetMapping("/getAll")
 		public List<ElectricVehicle> getAll() {
-			return cars ;
-		}		
+				}		
 			
 		// Post Requests (CREATE)
 		 @PostMapping("/create")
 		public ElectricVehicle create(@RequestBody ElectricVehicle input) {
-			 cars.add(input);
-			 
-		return cars.get(cars.size () -1);
-		
+
 		 }
 		 
 		 @GetMapping("/getById/{id}")
 			public ElectricVehicle getById(@PathVariable int id) {
-				return cars.get(id);
+
 			} 
-			
+		 
+					
 	 	 
 		 @PutMapping("/update/{id}")
 		 public ElectricVehicle update(@PathVariable int id, @RequestBody ElectricVehicle input) {
-			 cars.remove(id);
-			 cars.add(id, input);
-			 return cars.get(id);
+
 		 }
 		 
 	
 			// Delete Requests (DELETE)
 		 @DeleteMapping("/delete/{id}")
 		 public ElectricVehicle delete(@PathVariable int id) {
-			return this.cars.remove(id);
+
 		 }
+		 
 		 
 		 
 }
