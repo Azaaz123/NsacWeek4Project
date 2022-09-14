@@ -6,13 +6,11 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.qa.main.entities.ElectricVehicle;
-import com.qa.main.exceptions.ElectricVehicleNotFoundException;
 import com.qa.main.repo.ElectricVehicleRepo;
 
 @Service
 public class ElectricVehicleService {
 	
-	private List<ElectricVehicle> cars = new ArrayList <>();
 	
 	 private ElectricVehicleRepo repo;
 	 
@@ -34,7 +32,7 @@ public class ElectricVehicleService {
 		 
 
 		 public ElectricVehicle getById(long id) {
-			 return repo.findById(id).orElseThrow(ElectricVehicleNotFoundException::new);
+			 return repo.findById(id);
 		 }
 		 
 		 public List<ElectricVehicle> getByCarMake(String carMake) {
@@ -53,15 +51,26 @@ public class ElectricVehicleService {
 			 		 }
 		
 			 	 
-		 public ElectricVehicle update( long id, ElectricVehicle input) {
-			 cars.remove(id);
-			 cars.add(id, input);
-			 return cars.get(id);
+		 public ElectricVehicle update(long id, ElectricVehicle input) {
+			 ElectricVehicle existing = repo.findById(id);
+			 
+			 existing.setCarMake(input.getCarMake());
+			 existing.setCarModel(input.getCarModel());
+			 existing.setReleaseYear(input.getReleaseYear());
+			 existing.setMileRange(input.getMileRange());
+			 
+			return repo.saveAndFlush(existing);
+			
+		 }	
+		 	 
+			 public boolean delete(long id) {
+				 // Deletes the entry by ID
+				 repo.deleteById(id);
+				 
+				// Checks if entry exists by ID
+				 return !repo.existsById(id);
+				 
 		 }
-		 
-	
-
-	
 		 
 		 
 }

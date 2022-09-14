@@ -8,7 +8,7 @@ import com.qa.main.entities.ElectricVehicle;
 
 
 @Repository
-public class ElectricVehicleRepo extends JpaRepository<ElectricVehicle, Long> {
+public interface ElectricVehicleRepo extends JpaRepository<ElectricVehicle, Long> {
 
 
 	// SQL created // SELCT * FROM ElectricVehicle where car_make =?1
@@ -18,5 +18,4 @@ public class ElectricVehicleRepo extends JpaRepository<ElectricVehicle, Long> {
 	List<ElectricVehicle> findElectricVehicleByMileRangeGreaterThan(int mileRange);
 	
 	} 
-	
-}
+
