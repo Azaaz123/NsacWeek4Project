@@ -33,7 +33,7 @@ public class ElectricVehicleService {
 		 
 		
 			 	 
-		 public ElectricVehicle update( int id, ElectricVehicle input) {
+		 public ElectricVehicle update( long id, ElectricVehicle input) {
 			 cars.remove(id);
 			 cars.add(id, input);
 			 return cars.get(id);
@@ -59,6 +59,7 @@ public class ElectricVehicleService {
 		 public List<ElectricVehicle> getByMileRangeGreaterThan(int mileRange) {
 			 return repo.findElectricVehicleByMileRangeGreaterThan(mileRange);	 
 			 		 }
+		 
 		 
 		 
 }
