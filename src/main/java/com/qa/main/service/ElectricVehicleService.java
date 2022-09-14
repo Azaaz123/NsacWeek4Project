@@ -1,6 +1,5 @@
 package com.qa.main.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -32,7 +31,7 @@ public class ElectricVehicleService {
 		 
 
 		 public ElectricVehicle getById(long id) {
-			 return repo.findById(id);
+			 return repo.findById(id).get();
 		 }
 		 
 		 public List<ElectricVehicle> getByCarMake(String carMake) {
@@ -52,7 +51,7 @@ public class ElectricVehicleService {
 		
 			 	 
 		 public ElectricVehicle update(long id, ElectricVehicle input) {
-			 ElectricVehicle existing = repo.findById(id);
+			 ElectricVehicle existing = repo.findById(id).get();
 			 
 			 existing.setCarMake(input.getCarMake());
 			 existing.setCarModel(input.getCarModel());
