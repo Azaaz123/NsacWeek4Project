@@ -1,6 +1,5 @@
 package com.qa.main.repo;
 
-
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -23,3 +22,4 @@ public interface ElectricVehicleRepo extends JpaRepository<ElectricVehicle,Long>
 	List<ElectricVehicle> findElectricVehicleByReleaseYear(int releaseYear);
 	List<ElectricVehicle> findElectricVehicleByMileRangeGreaterThan(int mileRange); 
 }
+
