@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.qa.main.entities.ElectricVehicle;
+import com.qa.main.exceptions.ElectricVehicleNotFoundException;
 import com.qa.main.repo.ElectricVehicleRepo;
 
 @Service
@@ -23,34 +24,17 @@ public class ElectricVehicleService {
 
 
 		public List<ElectricVehicle> getAll() {
-			return cars ;
-		}		
+			return repo.findAll();
+		}
+
+		public ElectricVehicle  create(ElectricVehicle input) {
+			return repo.saveAndFlush(input);
 			
-
-		public ElectricVehicle create( ElectricVehicle input) {
-			 cars.add(input);
-			 
-		return cars.get(cars.size () -1);
-		
 		 }
 		 
 
-			public ElectricVehicle getById( int id) {
-				return cars.get(id);
-			} 
-		 
-		
-			 	 
-		 public ElectricVehicle update( long id, ElectricVehicle input) {
-			 cars.remove(id);
-			 cars.add(id, input);
-			 return cars.get(id);
-		 }
-		 
-	
-
-		 public ElectricVehicle delete(int id) {
-			return this.cars.remove(id);
+		 public ElectricVehicle getById(long id) {
+			 return repo.findById(id).orElseThrow(ElectricVehicleNotFoundException::new);
 		 }
 		 
 		 public List<ElectricVehicle> getByCarMake(String carMake) {
@@ -67,7 +51,17 @@ public class ElectricVehicleService {
 		 public List<ElectricVehicle> getByMileRangeGreaterThan(int mileRange) {
 			 return repo.findElectricVehicleByMileRangeGreaterThan(mileRange);	 
 			 		 }
+		
+			 	 
+		 public ElectricVehicle update( long id, ElectricVehicle input) {
+			 cars.remove(id);
+			 cars.add(id, input);
+			 return cars.get(id);
+		 }
 		 
+	
+
+	
 		 
 		 
 }
