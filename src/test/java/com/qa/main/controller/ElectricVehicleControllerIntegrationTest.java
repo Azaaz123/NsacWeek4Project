@@ -57,11 +57,11 @@ public class ElectricVehicleControllerIntegrationTest {
 	@Test
 	public void updateTest() throws Exception {
 //		     An Object for sending in the body in the request 		
-				ElectricVehicle input = new ElectricVehicle("Testla", "S", 2020, 350);
+				ElectricVehicle input = new ElectricVehicle("Testla", "X", 2020, 350);
 				String inputAsJSON = mapper.writeValueAsString(input); 
 
 				// An object for checking response
-				 ElectricVehicle response = new ElectricVehicle(1L,"Testla", "S", 2020, 350);
+				 ElectricVehicle response = new ElectricVehicle(1L,"Testla", "X", 2020, 350);
 					String responseAsJSON = mapper.writeValueAsString(response); 
 				
 				 
@@ -92,35 +92,80 @@ public class ElectricVehicleControllerIntegrationTest {
 	}
 	
 	@Test
-	public void getByIdTest() {
+	public void getByIdTest() throws Exception {
+		ElectricVehicle result = new ElectricVehicle(1L,"Kia", "EV6", 2022, 313);
+		
+		String resultAsJSON = mapper.writeValueAsString(result); 
+		
+		mvc.perform(get("/getById/1")
+				.contentType(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk())
+				.andExpect(content().json(resultAsJSON));
+	}
+	
+	@Test
+	public void getByCarMakeTest() throws Exception {
+		List<ElectricVehicle> result = new ArrayList<>();
+		result.add(new ElectricVehicle(1L,"Kia", "EV6", 2022, 313));
+		
+		String resultAsJSON = mapper.writeValueAsString(result); 
+		
+		mvc.perform(get("/getByCarMake/Kia")
+				.contentType(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk())
+				.andExpect(content().json(resultAsJSON));
+	}
+	
+	@Test
+	public void getByCarModeltest() throws Exception {
+		List<ElectricVehicle> result = new ArrayList<>();
+		result.add(new ElectricVehicle(1L,"Kia", "EV6", 2022, 313));
+		
+		String resultAsJSON = mapper.writeValueAsString(result); 
+		
+		mvc.perform(get("/getByCarModel/EV6")
+				.contentType(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk())
+				.andExpect(content().json(resultAsJSON));
+	}
+	
+	
+	@Test
+	public void getByReleaseYear() throws Exception  {
+		List<ElectricVehicle> result = new ArrayList<>();
+		result.add(new ElectricVehicle(1L,"Kia", "EV6", 2022, 313));
+		
+		String resultAsJSON = mapper.writeValueAsString(result); 
+		
+		mvc.perform(get("/getByReleaseYear/2022")
+				.contentType(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk())
+				.andExpect(content().json(resultAsJSON));	
 		
 	}
 	
 	@Test
-	public void getByCarMakeTest() {
+	public void getByMileRangeGreaterThan() throws Exception {
+		List<ElectricVehicle> result = new ArrayList<>();
+		result.add(new ElectricVehicle(1L,"Kia", "EV6", 2022, 313));
+		
+		String resultAsJSON = mapper.writeValueAsString(result); 
+		
+		mvc.perform(get("/getByMileRangeGreaterThan/300")
+				.contentType(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk())
+				.andExpect(content().json(resultAsJSON));	
+	
 	}
 	
 	@Test
-	public void getByCarModeltest() {
+	public void deleteTet() throws Exception {
+		 mvc.perform(delete("/delete/1")
+				.contentType(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk())
+				.andExpect(content().string("true"));	
+		
 	}
-	
-	
-	
-	@Test
-	public void getByReleaseYear() {
-	}
-	
-	
-	@Test
-	public void getByMileRangeGreaterThan(){
-	}
-	
-	
-	@Test
-	public void deleteTet(){
-	}
-	
-	
 
 }
 	
