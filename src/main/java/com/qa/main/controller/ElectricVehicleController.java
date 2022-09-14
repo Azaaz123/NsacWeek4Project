@@ -1,6 +1,5 @@
 package com.qa.main.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -21,8 +20,7 @@ public class ElectricVehicleController {
 	
 	private ElectricVehicleService service;
 
-	
-	 
+		 
 	 public ElectricVehicleController(ElectricVehicleService service) {
 		super();
 		this.service = service;
@@ -82,3 +80,4 @@ public class ElectricVehicleController {
 	 public boolean delete(@PathVariable long id) {
 		return service.delete(id);
 	 }
+}

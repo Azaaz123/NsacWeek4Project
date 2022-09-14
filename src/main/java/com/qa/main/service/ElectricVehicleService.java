@@ -6,45 +6,56 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.qa.main.entities.ElectricVehicle;
+import com.qa.main.exceptions.ElectricVehicleNotFoundException;
 import com.qa.main.repo.ElectricVehicleRepo;
 
 @Service
 public class ElectricVehicleService {
 	
-	private List<ElectricVehicle> cars = new ArrayList <>();
+	private ElectricVehicleRepo repo;
 	
-	 
-
+	public ElectricVehicleService(ElectricVehicleRepo repo) {
+		super();
+		this.repo = repo;
+	}
+	
 		public List<ElectricVehicle> getAll() {
-			return cars ;
-		}		
+		return repo.findAll();
+	}
+		
 			
 
-		public ElectricVehicle create( ElectricVehicle input) {
-			 cars.add(input);
-			 
-		return cars.get(cars.size () -1);
-		
+		public ElectricVehicle  create(ElectricVehicle input) {
+			return repo.saveAndFlush(input);
 		 }
 		 
 
-			public ElectricVehicle getById( int id) {
-				return cars.get(id);
-			} 
+		 public ElectricVehicle getById(long id) {
+			 return repo.findById(id).orElseThrow(ElectricVehicleNotFoundException::new);
+		 }
 		 
 		
 			 	 
-		 public ElectricVehicle update( int id, ElectricVehicle input) {
-			 cars.remove(id);
-			 cars.add(id, input);
-			 return cars.get(id);
-		 }
+		 public ElectricVehicle update(long id, ElectricVehicle input) {
+			 ElectricVehicle existing = repo.findById(id).orElseThrow(ElectricVehicleNotFoundException::new);
+			 
+			 existing.setCarMake(input.getCarMake());
+			 existing.setCarModel(input.getCarModel());
+			 existing.setReleaseYear(input.getReleaseYear());
+			 existing.setMileRange(input.getMileRange());
+			 
+			return repo.saveAndFlush(existing);
+			
+		 }	
 		 
-	
-
-		 public ElectricVehicle delete(int id) {
-			return this.cars.remove(id);
-		 }
+		 public boolean delete(long id) {
+			 // Deletes the entry by ID
+			 repo.deleteById(id);
+			 
+			// Checks if entry exists by ID
+			 return !repo.existsById(id);
+			 
+	 }
 		 
 		 public List<ElectricVehicle> getByCarMake(String carMake) {
 			 return repo.findElectricVehicleByCarMake(carMake);	 
