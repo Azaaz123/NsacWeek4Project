@@ -1,48 +1,37 @@
 package com.qa.main.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
 import com.qa.main.entities.ElectricVehicle;
+import com.qa.main.repo.ElectricVehicleRepo;
 
 @Service
 public class ElectricVehicleService {
 	
-	private List<ElectricVehicle> cars = new ArrayList <>();
 	
+	 private ElectricVehicleRepo repo;
 	 
+	 
+		public ElectricVehicleService(ElectricVehicleRepo repo) {
+		super();
+		this.repo = repo;
+	}
+
 
 		public List<ElectricVehicle> getAll() {
-			return cars ;
-		}		
+			return repo.findAll();
+		}
+
+		public ElectricVehicle  create(ElectricVehicle input) {
+			return repo.saveAndFlush(input);
 			
-
-		public ElectricVehicle create( ElectricVehicle input) {
-			 cars.add(input);
-			 
-		return cars.get(cars.size () -1);
-		
 		 }
 		 
 
-			public ElectricVehicle getById( int id) {
-				return cars.get(id);
-			} 
-		 
-		
-			 	 
-		 public ElectricVehicle update( int id, ElectricVehicle input) {
-			 cars.remove(id);
-			 cars.add(id, input);
-			 return cars.get(id);
-		 }
-		 
-	
-
-		 public ElectricVehicle delete(int id) {
-			return this.cars.remove(id);
+		 public ElectricVehicle getById(long id) {
+			 return repo.findById(id).get();
 		 }
 		 
 		 public List<ElectricVehicle> getByCarMake(String carMake) {
@@ -59,6 +48,28 @@ public class ElectricVehicleService {
 		 public List<ElectricVehicle> getByMileRangeGreaterThan(int mileRange) {
 			 return repo.findElectricVehicleByMileRangeGreaterThan(mileRange);	 
 			 		 }
+		
+			 	 
+		 public ElectricVehicle update(long id, ElectricVehicle input) {
+			 ElectricVehicle existing = repo.findById(id).get();
+			 
+			 existing.setCarMake(input.getCarMake());
+			 existing.setCarModel(input.getCarModel());
+			 existing.setReleaseYear(input.getReleaseYear());
+			 existing.setMileRange(input.getMileRange());
+			 
+			return repo.saveAndFlush(existing);
+			
+		 }	
+		 	 
+			 public boolean delete(long id) {
+				 // Deletes the entry by ID
+				 repo.deleteById(id);
+				 
+				// Checks if entry exists by ID
+				 return !repo.existsById(id);
+				 
+		 }
 		 
 		 
 }
