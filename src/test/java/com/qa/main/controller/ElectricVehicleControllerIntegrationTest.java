@@ -57,11 +57,11 @@ public class ElectricVehicleControllerIntegrationTest {
 	@Test
 	public void updateTest() throws Exception {
 //		     An Object for sending in the body in the request 		
-				ElectricVehicle input = new ElectricVehicle("Testla", "S", 2020, "awd",  77, 350);
+				ElectricVehicle input = new ElectricVehicle("Testla", "S", 2020, 350);
 				String inputAsJSON = mapper.writeValueAsString(input); 
 
 				// An object for checking response
-				 ElectricVehicle response = new ElectricVehicle(1L,"Testla", "S", 2020, "awd",  77, 350);
+				 ElectricVehicle response = new ElectricVehicle(1L,"Testla", "S", 2020, 350);
 					String responseAsJSON = mapper.writeValueAsString(response); 
 				
 				 
@@ -80,7 +80,7 @@ public class ElectricVehicleControllerIntegrationTest {
 		//Created a List
 			List<ElectricVehicle> result = new ArrayList<>();
 	// Added my expected ElectricVehicle to the list
-			result.add(new ElectricVehicle(1L,"Kia", "EV6", 2022, "awd",  77, 313));
+			result.add(new ElectricVehicle(1L,"Kia", "EV6", 2022, 313));
 			
 			String resultAsJSON = mapper.writeValueAsString(result); 
 			
@@ -92,15 +92,8 @@ public class ElectricVehicleControllerIntegrationTest {
 	}
 	
 	@Test
-	public void getByIdTest() throws Exception {
-		ElectricVehicle result = new ElectricVehicle(1L,"Kia", "EV6", 2022, "awd",  77, 313);
+	public void getByIdTest() {
 		
-		String resultAsJSON = mapper.writeValueAsString(result); 
-		
-		mvc.perform(get("/getById/1")
-				.contentType(MediaType.APPLICATION_JSON))
-				.andExpect(status().isOk())
-				.andExpect(content().json(resultAsJSON));
 	}
 	
 	@Test
