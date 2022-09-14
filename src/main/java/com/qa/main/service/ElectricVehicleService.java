@@ -6,13 +6,21 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.qa.main.entities.ElectricVehicle;
+import com.qa.main.repo.ElectricVehicleRepo;
 
 @Service
 public class ElectricVehicleService {
 	
 	private List<ElectricVehicle> cars = new ArrayList <>();
 	
+	 private ElectricVehicleRepo repo;
 	 
+	 
+		public ElectricVehicleService(ElectricVehicleRepo repo) {
+		super();
+		this.repo = repo;
+	}
+
 
 		public List<ElectricVehicle> getAll() {
 			return cars ;
