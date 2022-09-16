@@ -1,0 +1,41 @@
+#formDiv {
+    margin-top: 2%;
+    margin-left: 2%;
+    width: 25%;
+    /* border: solid 2px black;*/
+    display: inline-grid;
+    padding: 10px;
+}
+
+#resultsDiv {
+ 
+    /* border: solid black;*/
+    width: 60%;
+    display: inline-grid;
+
+}
+
+.entry-Parent {
+    padding-left: 30%;
+}
+
+.entry-div {
+    
+}
+
+tablelist {
+    text-align: center;
+    width: 100%
+}
+
+td{
+    border 1px solid blue;
+    text-align: left;
+    padding: 8px 15px;
+}
+
+tr:nth-child(even), table.list thread> tr{
+    background-color: aquamarine;
+}
+
+input[type="text"], input[type="number"]
