@@ -32,11 +32,11 @@ let printResults = (result) => {
     let td4 = document.createElement("td");
     let td5 = document.createElement("td");
 
-    td1.textContent= result.id
-    td2.textContent= result.carMake
-    td3.textContent= result.carModel
-    td4.textContent= result.releaseYear
-    td5.textContent= result.mileRange
+    td1.textContent= result.id;
+    td2.textContent= result.carMake;
+    td3.textContent= result.carModel;
+    td4.textContent= result.releaseYear;
+    td5.textContent= result.mileRange;
 
 
     tr.append(td1,td2,td3,td4,td5);
